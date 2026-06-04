@@ -83,10 +83,14 @@ const links = [
   }
 
   .nav--scrolled {
-    background: color-mix(in srgb, var(--bg) 88%, transparent);
+    background: rgba(7, 8, 12, 0.88);
     backdrop-filter: blur(16px);
     -webkit-backdrop-filter: blur(16px);
     border-bottom-color: var(--border);
+  }
+
+  :global([data-theme="light"]) .nav--scrolled {
+    background: rgba(248, 250, 252, 0.9);
   }
 
   .nav__inner {
@@ -201,7 +205,7 @@ const links = [
     align-items: center;
     gap: 1.25rem;
     padding: 0 1.5rem;
-    background: color-mix(in srgb, var(--bg) 97%, transparent);
+    background: rgba(7, 8, 12, 0.97);
     border-bottom: 1px solid var(--border);
     max-height: 0;
     overflow: hidden;
@@ -230,32 +234,34 @@ const links = [
 </style>
 
 <script>
-  const nav    = document.getElementById('nav')!;
-  const burger = document.getElementById('burger')!;
-  const menu   = document.getElementById('mobile-menu')!;
-  const toggleBtns = document.querySelectorAll<HTMLButtonElement>('#theme-toggle, #theme-toggle-mobile');
+  const nav    = document.getElementById('nav');
+  const burger = document.getElementById('burger');
+  const menu   = document.getElementById('mobile-menu');
 
   // Scroll: add background blur when page is scrolled
-  window.addEventListener('scroll', () => {
+  window.addEventListener('scroll', function() {
     nav.classList.toggle('nav--scrolled', window.scrollY > 60);
   }, { passive: true });
 
   // Theme toggle
-  function getTheme(): string {
+  function getTheme() {
     return document.documentElement.getAttribute('data-theme') ||
       (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
   }
 
-  toggleBtns.forEach(btn => {
-    btn.addEventListener('click', () => {
-      const next = getTheme() === 'dark' ? 'light' : 'dark';
-      document.documentElement.setAttribute('data-theme', next);
-      localStorage.setItem('theme', next);
+  function setTheme(theme) {
+    document.documentElement.setAttribute('data-theme', theme);
+    localStorage.setItem('theme', theme);
+  }
+
+  document.querySelectorAll('#theme-toggle, #theme-toggle-mobile').forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      setTheme(getTheme() === 'dark' ? 'light' : 'dark');
     });
   });
 
   // Mobile menu toggle
-  burger.addEventListener('click', () => {
+  burger.addEventListener('click', function() {
     const open = burger.getAttribute('aria-expanded') === 'true';
     burger.setAttribute('aria-expanded', String(!open));
     menu.setAttribute('aria-hidden', String(open));
@@ -264,12 +270,12 @@ const links = [
   });
 
   // Close menu when a link is clicked
-  menu.querySelectorAll('a').forEach(a =>
-    a.addEventListener('click', () => {
+  menu.querySelectorAll('a').forEach(function(a) {
+    a.addEventListener('click', function() {
       burger.setAttribute('aria-expanded', 'false');
       menu.setAttribute('aria-hidden', 'true');
       burger.classList.remove('active');
       menu.classList.remove('open');
-    })
-  );
+    });
+  });
 </script>
