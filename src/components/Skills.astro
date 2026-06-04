@@ -1,0 +1,120 @@
+---
+const categories = [
+  {
+    label: 'Languages',
+    icon: `<path d="M16 18l2-2-6-6 6-6-2-2-8 8z"/><path d="M8 6l-2 2 2 2"/>`,
+    tags: ['Java', 'Go', 'JavaScript', 'SQL'],
+  },
+  {
+    label: 'Backend & Frameworks',
+    icon: `<rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/>`,
+    tags: ['Spring Boot', 'JDBC', 'REST APIs', 'JUnit', 'Mockito', 'Microservices'],
+  },
+  {
+    label: 'Databases & Search',
+    icon: `<ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/>`,
+    tags: ['MySQL', 'PostgreSQL', 'MongoDB', 'Elasticsearch', 'Redis'],
+  },
+  {
+    label: 'Frontend',
+    icon: `<polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/>`,
+    tags: ['React.js', 'HTML', 'CSS', 'Bootstrap', 'Material UI'],
+  },
+  {
+    label: 'Cloud',
+    icon: `<path d="M18 10h-1.26A8 8 0 109 20h9a5 5 0 000-10z"/>`,
+    tags: ['AWS', 'GCP', 'Azure'],
+  },
+  {
+    label: 'DevOps & Infrastructure',
+    icon: `<circle cx="12" cy="12" r="3"/><path d="M19.07 4.93l-1.41 1.41M4.93 4.93l1.41 1.41M4.93 19.07l1.41-1.41M19.07 19.07l-1.41-1.41M20 12h2M2 12h2M12 20v2M12 2v2"/>`,
+    tags: ['Docker', 'Kubernetes', 'Kafka', 'Jenkins', 'ArgoCD', 'Pulumi', 'Helm'],
+  },
+  {
+    label: 'Tools & Paradigms',
+    icon: `<path d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.77-3.77a6 6 0 01-7.94 7.94l-6.91 6.91a2.12 2.12 0 01-3-3l6.91-6.91a6 6 0 017.94-7.94l-3.76 3.76z"/>`,
+    tags: ['Git', 'Swagger', 'Postman', 'Message Queues', 'OOP'],
+  },
+];
+---
+
+<section class="skills" id="skills">
+  <div class="container">
+    <div data-reveal>
+      <p class="section-eyebrow">Technical Skills</p>
+      <h2 class="section-title">What I Work With</h2>
+      <div class="section-rule"></div>
+    </div>
+
+    <div class="skills__grid">
+      {categories.map((cat, i) => (
+        <div class="skill-card card" data-reveal data-delay={String(Math.min(i + 1, 6))}>
+          <div class="skill-card__header">
+            <div class="skill-card__icon" aria-hidden="true">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <Fragment set:html={cat.icon} />
+              </svg>
+            </div>
+            <h3 class="skill-card__label">{cat.label}</h3>
+          </div>
+          <div class="skill-card__tags">
+            {cat.tags.map(tag => <span class="tag">{tag}</span>)}
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .skills { background: var(--bg-card2, #0a0c12); }
+
+  .skills__grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.25rem;
+  }
+
+  .skill-card {
+    padding: 1.5rem;
+    transition: border-color 0.3s var(--ease), transform 0.3s var(--ease), box-shadow 0.3s var(--ease);
+  }
+  .skill-card:hover {
+    transform: translateY(-3px);
+    border-color: rgba(99,102,241,0.3);
+    box-shadow: 0 12px 36px rgba(0,0,0,0.25);
+  }
+
+  .skill-card__header {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 1rem;
+  }
+
+  .skill-card__icon {
+    width: 36px;
+    height: 36px;
+    background: rgba(99,102,241,0.1);
+    border: 1px solid rgba(99,102,241,0.18);
+    border-radius: var(--r-sm);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--indigo-lt);
+    flex-shrink: 0;
+  }
+
+  .skill-card__label {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--text-2);
+    letter-spacing: 0.02em;
+  }
+
+  .skill-card__tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+</style>

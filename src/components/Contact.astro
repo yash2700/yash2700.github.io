@@ -1,0 +1,180 @@
+---
+const links = [
+  {
+    label: 'Email',
+    value: 'yaswanthreddyboggala@gmail.com',
+    href:  'mailto:yaswanthreddyboggala@gmail.com',
+    icon: `<rect x="2" y="4" width="20" height="16" rx="2"/><path d="M2 7l10 7 10-7"/>`,
+  },
+  {
+    label: 'GitHub',
+    value: 'github.com/yash2700',
+    href:  'https://github.com/yash2700',
+    icon: `<path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 00-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0020 4.77 5.07 5.07 0 0019.91 1S18.73.65 16 2.48a13.38 13.38 0 00-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 005 4.77a5.44 5.44 0 00-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 009 18.13V22"/>`,
+    external: true,
+  },
+  {
+    label: 'LinkedIn',
+    value: 'linkedin.com/in/yaswanthreddyboggala',
+    href:  'https://linkedin.com/in/yaswanthreddyboggala',
+    icon: `<path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/>`,
+    external: true,
+  },
+];
+---
+
+<section class="contact" id="contact">
+  <div class="container">
+    <div data-reveal>
+      <p class="section-eyebrow">Contact</p>
+      <h2 class="section-title">Let's Connect</h2>
+      <div class="section-rule"></div>
+      <p class="contact__sub">
+        Open to senior engineering roles, interesting systems problems, and good conversations.
+        Reach out via any channel below.
+      </p>
+    </div>
+
+    <div class="contact__links">
+      {links.map((l, i) => (
+        <a
+          href={l.href}
+          class="contact-card card"
+          data-reveal
+          data-delay={String(i + 1)}
+          {...(l.external ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
+          aria-label={`${l.label}: ${l.value}`}
+        >
+          <div class="contact-card__icon" aria-hidden="true">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <Fragment set:html={l.icon} />
+            </svg>
+          </div>
+          <div class="contact-card__body">
+            <span class="contact-card__label">{l.label}</span>
+            <span class="contact-card__value">{l.value}</span>
+          </div>
+          <div class="contact-card__arrow" aria-hidden="true">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M7 17l9.2-9.2M17 17V7H7"/>
+            </svg>
+          </div>
+        </a>
+      ))}
+    </div>
+
+    <footer class="contact__footer" data-reveal>
+      <p>Designed & built by Yaswanth Reddy · <span id="year"></span></p>
+      <p>Built with <a href="https://astro.build" target="_blank" rel="noopener noreferrer">Astro</a> · Hosted on GitHub Pages</p>
+    </footer>
+  </div>
+</section>
+
+<style>
+  .contact { background: var(--bg-card2, #0a0c12); }
+
+  .contact__sub {
+    color: var(--text-2);
+    max-width: 480px;
+    font-size: 0.95rem;
+    line-height: 1.75;
+    margin-bottom: 2.5rem;
+  }
+
+  .contact__links {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    max-width: 600px;
+    margin-bottom: 4rem;
+  }
+
+  .contact-card {
+    display: flex;
+    align-items: center;
+    gap: 1.25rem;
+    padding: 1.25rem 1.5rem;
+    text-decoration: none;
+    transition: border-color 0.25s var(--ease), transform 0.25s var(--ease), box-shadow 0.25s var(--ease);
+  }
+  .contact-card:hover {
+    border-color: rgba(99,102,241,0.4);
+    transform: translateX(6px);
+    box-shadow: 0 8px 28px rgba(0,0,0,0.25);
+  }
+
+  .contact-card__icon {
+    width: 44px;
+    height: 44px;
+    background: rgba(99,102,241,0.08);
+    border: 1px solid rgba(99,102,241,0.15);
+    border-radius: var(--r-sm);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--indigo-lt);
+    flex-shrink: 0;
+    transition: background 0.25s, border-color 0.25s;
+  }
+  .contact-card:hover .contact-card__icon {
+    background: rgba(99,102,241,0.16);
+    border-color: var(--indigo);
+  }
+
+  .contact-card__body {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 0.15rem;
+  }
+  .contact-card__label {
+    font-size: 0.75rem;
+    font-family: var(--mono);
+    letter-spacing: 0.08em;
+    color: var(--text-3);
+    text-transform: uppercase;
+  }
+  .contact-card__value {
+    font-size: 0.9rem;
+    color: var(--text);
+    font-weight: 500;
+    word-break: break-all;
+  }
+
+  .contact-card__arrow {
+    color: var(--text-3);
+    transition: color 0.25s, transform 0.25s;
+  }
+  .contact-card:hover .contact-card__arrow {
+    color: var(--indigo-lt);
+    transform: translate(2px, -2px);
+  }
+
+  /* Footer */
+  .contact__footer {
+    border-top: 1px solid var(--border);
+    padding-top: 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+    color: var(--text-3);
+    font-size: 0.8rem;
+    font-family: var(--mono);
+  }
+  .contact__footer a {
+    color: var(--indigo-lt);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  .contact__footer a:hover { color: var(--cyan-lt); }
+
+  @media (max-width: 480px) {
+    .contact-card { padding: 1rem 1.25rem; gap: 1rem; }
+    .contact-card__value { font-size: 0.82rem; }
+  }
+</style>
+
+<script>
+  const el = document.getElementById('year');
+  if (el) el.textContent = String(new Date().getFullYear());
+</script>

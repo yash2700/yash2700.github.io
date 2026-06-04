@@ -1,0 +1,232 @@
+---
+const jobs = [
+  {
+    company:  'Dexcom Inc',
+    role:     'Senior Software Engineer',
+    period:   'Sep 2025 – Present',
+    location: 'Bengaluru',
+    current:  true,
+    highlights: [
+      'Built Campaign microservices in collaboration with product, QA, and platform teams to enable scalable campaign orchestration.',
+      'Enabled high-scale campaign execution with async workflows, retries, and message queues — ensuring reliable delivery at 70M records/day.',
+      'Mentored 2 junior engineers, conducted code reviews, and guided engineering best practices to improve overall delivery quality.',
+      'Optimized database queries using caching and efficient data access patterns — reducing query volume by 99.9%, compute usage by 80%, and saving $15K+ annually.',
+      'Architected and implemented an async service-to-service pipeline using GCP BigQuery and Kafka to process large-scale user data via efficient batched/paginated transfer.',
+      'Improved system reliability via API rate limiting and deployed via Helm/ArgoCD with 85%+ test coverage.',
+    ],
+  },
+  {
+    company:  'Precize Inc',
+    role:     'Full Stack Developer',
+    period:   'Feb 2024 – Aug 2025',
+    location: 'Bengaluru',
+    current:  false,
+    highlights: [
+      'Developed a producer-consumer pipeline processing 3M+ daily activity logs across AWS, Azure, and GCP for resource tracking and auditability.',
+      'Standardized cloud policies across all 3 CSPs (AWS, Azure, GCP) to maintain unified governance and compliance.',
+      'Created 50+ Cloud Service Collectors using Spring Boot, integrating AWS, GCP, and Azure SDKs and REST APIs.',
+      'Engineered an Alerting System to monitor and notify critical configuration changes across 3 CSPs — reducing issue resolution time significantly.',
+      'Built Monthly Cost Evaluation feature with precise cost algorithms for all 3 CSPs ensuring accurate client billing on onboarding.',
+      'Generated 20+ HeroStats to visualize client resource usage, improving optimization visibility across cloud environments.',
+      'Identified and implemented optimizations (sharding, caching, reduced search times) — achieving 20% performance improvement.',
+      'Designed Reports and Scheduling pages in ReactJS with caching and component tuning — reducing load time by 15%.',
+    ],
+  },
+  {
+    company:  'Infosys Ltd.',
+    role:     'System Engineer',
+    period:   'Jul 2022 – Jan 2024',
+    location: 'Chennai',
+    current:  false,
+    highlights: [
+      'Engineered and deployed 2 microservices on EKS using Spring Boot.',
+      'Developed stored procedures for 5+ microservices, reducing database call times by up to 30%.',
+      'Refactored 10+ services to adopt fault-tolerant design patterns — achieving 80%+ unit test coverage and improving uptime by 50%.',
+      'Built RESTful abstraction layers over SOAP services, decoupling legacy interfaces and enabling faster external consumer integration.',
+    ],
+  },
+];
+---
+
+<section class="experience" id="experience">
+  <div class="container">
+    <div data-reveal>
+      <p class="section-eyebrow">Work Experience</p>
+      <h2 class="section-title">Where I've Worked</h2>
+      <div class="section-rule"></div>
+    </div>
+
+    <div class="timeline">
+      {jobs.map((job, i) => (
+        <article class="timeline__item" data-reveal data-delay={String(i + 1)}>
+          <div class="timeline__marker" aria-hidden="true">
+            <div class={`timeline__dot ${job.current ? 'timeline__dot--active' : ''}`}></div>
+          </div>
+
+          <div class="timeline__card card">
+            <header class="timeline__card-header">
+              <div class="timeline__card-left">
+                <h3 class="timeline__company">{job.company}</h3>
+                <p class="timeline__role">{job.role}</p>
+              </div>
+              <div class="timeline__card-right">
+                <span class={`timeline__badge ${job.current ? 'timeline__badge--active' : ''}`}>
+                  {job.period}
+                </span>
+                <span class="timeline__loc">{job.location}</span>
+              </div>
+            </header>
+
+            <ul class="timeline__bullets">
+              {job.highlights.map(h => (
+                <li>{h}</li>
+              ))}
+            </ul>
+          </div>
+        </article>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .experience { background: var(--bg); }
+
+  .timeline { position: relative; }
+
+  /* Vertical line */
+  .timeline::before {
+    content: '';
+    position: absolute;
+    left: 10px;
+    top: 8px;
+    bottom: 8px;
+    width: 1.5px;
+    background: linear-gradient(to bottom, var(--indigo), var(--cyan), transparent);
+  }
+
+  .timeline__item {
+    display: grid;
+    grid-template-columns: 24px 1fr;
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+  }
+  .timeline__item:last-child { margin-bottom: 0; }
+
+  /* Dot */
+  .timeline__marker {
+    display: flex;
+    justify-content: center;
+    padding-top: 1.6rem;
+  }
+
+  .timeline__dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: var(--border-h);
+    border: 2px solid var(--border-h);
+    flex-shrink: 0;
+    transition: background 0.3s, border-color 0.3s;
+  }
+  .timeline__dot--active {
+    background: var(--indigo);
+    border-color: var(--indigo);
+    box-shadow: 0 0 10px rgba(99,102,241,0.5);
+  }
+  .timeline__item:hover .timeline__dot {
+    background: var(--indigo-lt);
+    border-color: var(--indigo-lt);
+  }
+
+  /* Card */
+  .timeline__card {
+    padding: 1.5rem 1.75rem;
+    transition: border-color 0.3s var(--ease), box-shadow 0.3s var(--ease), transform 0.3s var(--ease);
+  }
+  .timeline__card:hover {
+    border-color: rgba(99,102,241,0.3);
+    box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+    transform: translateX(4px);
+  }
+
+  .timeline__card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 1rem;
+    margin-bottom: 1.25rem;
+    flex-wrap: wrap;
+  }
+
+  .timeline__company {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--text);
+    margin-bottom: 0.2rem;
+  }
+  .timeline__role {
+    font-size: 0.87rem;
+    color: var(--indigo-lt);
+    font-weight: 500;
+  }
+
+  .timeline__card-right {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 0.3rem;
+  }
+
+  .timeline__badge {
+    font-family: var(--mono);
+    font-size: 0.75rem;
+    color: var(--text-3);
+    padding: 0.25rem 0.6rem;
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    white-space: nowrap;
+  }
+  .timeline__badge--active {
+    color: var(--cyan-lt);
+    border-color: rgba(6,182,212,0.3);
+    background: rgba(6,182,212,0.06);
+  }
+
+  .timeline__loc {
+    font-size: 0.75rem;
+    color: var(--text-3);
+    font-family: var(--mono);
+  }
+
+  /* Bullets */
+  .timeline__bullets {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+  }
+  .timeline__bullets li {
+    font-size: 0.87rem;
+    color: var(--text-2);
+    line-height: 1.65;
+    padding-left: 1.2rem;
+    position: relative;
+  }
+  .timeline__bullets li::before {
+    content: '▸';
+    position: absolute;
+    left: 0;
+    color: var(--indigo-lt);
+    font-size: 0.7rem;
+    top: 0.15em;
+  }
+
+  @media (max-width: 640px) {
+    .timeline::before { left: 7px; }
+    .timeline__card-header { flex-direction: column; }
+    .timeline__card-right { align-items: flex-start; }
+    .timeline__card { padding: 1.25rem; }
+  }
+</style>
